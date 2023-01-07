@@ -1,0 +1,300 @@
+// decide current step
+let currentStep = 1;
+
+// saves user data
+const userData = {
+    billingType: 0,
+    billingPlan: 0,
+    plan: 0,
+};
+
+// navbar options
+const navbarOptions = [
+    {
+        id: 1,
+        optionText: "Your Info"
+    },
+
+    {
+        id: 2,
+        optionText: "Select Plan"
+    },
+
+    {
+        id: 3,
+        optionText: "Add-Ons"
+    },
+
+    {
+        id: 4,
+        optionText: "Summary"
+    },
+]
+
+// data for billing plans
+const billingPlans = [
+    {
+        id: 0,
+        title: "Arcade",
+        image: "assets/images/icon-arcade.svg",
+        billMonthly: "9",
+        billYearly: "90",
+        benifitsYearly: "2 months free"
+    },
+
+    {
+        id: 1,
+        title: "Advanced",
+        image: "assets/images/icon-advanced.svg",
+        billMonthly: "12",
+        billYearly: "120",
+        benifitsYearly: "2 months free"
+    },
+
+    {
+        id: 2,
+        title: "Pro",
+        image: "assets/images/icon-pro.svg",
+        billMonthly: "15",
+        billYearly: "150",
+        benifitsYearly: "2 months free"
+    }
+]
+
+// data for add-ons options
+const addOnsOptions = [
+    {
+        id: 0,
+        title: "Online Service",
+        description: "Access to multiplayer games.",
+        billMonthly: "1",
+        billYearly: "10"
+    },
+
+    {
+        id: 1,
+        title: "Larger Storage",
+        description: "Extra 1TB of cloud save.",
+        billMonthly: "2",
+        billYearly: "20"
+    },
+
+    {
+        id: 2,
+        title: "Customizable Profile",
+        description: "Custom theme on your profile.",
+        billMonthly: "2",
+        billYearly: "20"
+    }
+]
+
+// content map
+const contentData = {
+    1: `
+        <div class="page-main-content">
+            <h2 class="content-head-text">Personal info</h2>
+            <p class="content-text">Please enter your name, email address, and phone number.</p>
+
+            <p class="content-head-text">Name</p>
+            <input class="content-textfield" type="text" placeholder="e.g. Stephen King"/>
+
+            <p class="content-head-text">Email Address</p>
+            <input class="content-textfield" type="email" placeholder="e.g. stephenking@lorem.com"/>
+
+            <p class="content-head-text">Phone Number</p>
+            <input class="content-textfield" type="tel" placeholder="+1 234 567 890"/>
+        <div>
+
+        <button class="content-button" onClick="nextClick(1)">
+            Next Step
+        </button>
+    `,
+    
+    2: `
+        <div class="page-main-content">
+            <h2 class="content-head-text">Select your plan</h2>
+            <p class="content-text">You have the option of monthly or yearly billing.</p>
+
+            <div id="billing-card-holder"></div>
+
+            <div class="billing-type-selector-container">
+                <span class=${userData.billingType === 0 ? "selected-bill-type" : "non-selected-bill-type"} id="billing-choice-monthly-text">
+                    Monthly
+                </span>
+
+                <label class="switch">
+                    <input id="billing-type-selector" type="checkbox" onChange="billingTypeChange()">
+                    <span class="slider round"></span>
+                </label>
+
+                <span class=${userData.billingType === 1 ? "selected-bill-type" : "non-selected-bill-type"} id="billing-choice-yearly-text">
+                    Yearly
+                </span>
+            </div>
+        <div>
+
+        <button class="content-button-prev" onClick="nextClick(-1)">
+            Go Back
+        </button>
+
+        <button class="content-button" onClick="nextClick(1)">
+            Next Step
+        </button>
+    `,
+
+    3: `
+        <div class="page-main-content">
+            <h2 class="content-head-text">Pick add-ons</h2>
+            <p class="content-text">Add-ons help enhance your gaming experience.</p>
+
+            <div id="card-holder"></div>
+
+
+        <div>
+
+        <button class="content-button-prev" onClick="nextClick(-1)">
+            Go Back
+        </button>
+
+        <button class="content-button" onClick="nextClick(1)">
+            Next Step
+        </button>
+    `,
+
+    4: `
+    <div class="page-main-content">
+        <h2 class="content-head-text">Summary</h2>
+        <p class="content-text">Double check everythong looks OK before confirming.</p>
+
+        <div id="card-holder"></div>
+
+
+    <div>
+
+    <button class="content-button-prev" onClick="nextClick(-1)">
+        Go Back
+    </button>
+
+    <button class="content-button submit-button">
+        Submit
+    </button>
+`
+}
+
+// function to load navbar with navOptions
+const loadNavbar = () => {
+    // retreive navbar
+    const navbar = document.getElementById("navbar");
+
+    // create navbar data
+    const navbarData = navbarOptions.map((entry) => {
+        return(
+            `<div class="nav-item" key=${entry.id}>
+                <button class=${`${currentStep === entry.id ? "navbar-button-active" : "navbar-button"}`}>
+                    ${entry.id}
+                </button>
+
+                <span class="navbar-option-description">
+                    <p class="navbar-option-description-title">Step ${entry.id}</p=>
+                    <p class="navbar-option-description-text">${entry.optionText}</p>
+                </span>
+            </nav>`
+        )
+    })
+
+    // set navbar
+    navbarData.forEach((entry) => {
+        navbar.innerHTML = navbar.innerHTML + entry;
+    })
+    
+}
+// function to load pricing cards
+const loadPlanCards = () => {
+    const billingCardHolder = document.getElementById("billing-card-holder");
+
+    // get billing data
+    const billingData = billingPlans.map((entry) => {
+        return `
+            <div key=${entry.id} class="plan-card ${entry.id === userData.plan ? "selected-plan" : ""}" onClick="planSelected(${entry.id})">
+                <img class="plan-card-image" src=${entry.image} alt=${entry.title}/>
+
+                <div class="plan-card-details">
+                    <h4 class="blueText">${entry.title}</h4>
+                    ${userData.billingType === 0 ? `<p class="greyText">$${entry.billMonthly}/mo</p>` : 
+                    `<div>
+                        <p class="greyText">$${entry.billYearly}/yr</p>
+                        <p class="blueText">${entry.benifitsYearly}</p>
+                    </div>
+                </div>`
+            }
+            </div>
+        `
+    })
+
+    // clear existing data
+    billingCardHolder.innerHTML = "";
+
+    // load data
+    billingData.forEach((entry) => {
+        billingCardHolder.innerHTML = billingCardHolder.innerHTML + entry;
+    })
+}
+
+// function to transition to the next step
+const nextClick = (step) => {
+    currentStep += step;
+
+    // clear navbar
+    navbar.innerHTML = "";
+
+    // reload navbar
+    loadNavbar();
+
+    // load the content of the current page
+    document.getElementById("content").innerHTML = contentData[currentStep];
+
+    // load pricing cards for step 2
+    if(currentStep === 2){
+        loadPlanCards();
+    }
+}
+
+
+// function to run when body is loaded
+const loadHandler = () => {
+    // load the navbar
+    loadNavbar();
+
+    // load the content of page 1
+    document.getElementById("content").innerHTML = contentData[1];
+}
+
+// function to change billing type
+const billingTypeChange = () => {
+    const yearlyText = document.getElementById("billing-choice-yearly-text");
+    const monthlyText = document.getElementById("billing-choice-monthly-text");
+    const selection = document.getElementById("billing-type-selector").checked;
+
+    userData.billingType = selection ? 1 : 0;
+
+    if(selection){
+        yearlyText.className = "selected-bill-type";
+        monthlyText.className = "non-selected-bill-type"
+    }  
+    else{
+        yearlyText.className = "non-selected-bill-type";
+        monthlyText.className = "selected-bill-type"
+    }
+
+    // reload pricing data
+    loadPlanCards();
+}
+
+// function to set selected plan
+const planSelected = (id) => {
+    // set new plan
+    userData.plan = id;
+
+    // reload the plan cards
+    loadPlanCards();
+}
