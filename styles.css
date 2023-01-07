@@ -208,6 +208,39 @@ html{
     margin-bottom: 20px;
 }
 
+#addons-card-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.add-on-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 10px;
+}
+
+.add-on-card-main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.add-on-card-description{
+    margin-left: 10px;
+}
+
+.selected-card{
+    background-color: #F8F9FE;
+    border: 1px solid #473DFE;
+    border-radius: 5px;
+}
+
 .plan-card{
     display: flex;
     flex-direction: row;
@@ -215,12 +248,6 @@ html{
     margin-bottom: 10px;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
-}
-
-.selected-plan{
-    background-color: #F8F9FE;
-    border: 1px solid #473DFE;
     border-radius: 5px;
 }
 

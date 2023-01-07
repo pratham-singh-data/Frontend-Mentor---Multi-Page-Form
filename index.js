@@ -6,6 +6,9 @@ const userData = {
     billingType: 0,
     billingPlan: 0,
     plan: 0,
+    addOns:{
+        1: true
+    }
 };
 
 // navbar options
@@ -147,7 +150,7 @@ const contentData = {
             <h2 class="content-head-text">Pick add-ons</h2>
             <p class="content-text">Add-ons help enhance your gaming experience.</p>
 
-            <div id="card-holder"></div>
+            <div id="addons-card-holder"></div>
 
 
         <div>
@@ -215,7 +218,7 @@ const loadPlanCards = () => {
     // get billing data
     const billingData = billingPlans.map((entry) => {
         return `
-            <div key=${entry.id} class="plan-card ${entry.id === userData.plan ? "selected-plan" : ""}" onClick="planSelected(${entry.id})">
+            <div key=${entry.id} class="plan-card ${entry.id === userData.plan ? "selected-card" : ""}" onClick="planSelected(${entry.id})">
                 <img class="plan-card-image" src=${entry.image} alt=${entry.title}/>
 
                 <div class="plan-card-details">
@@ -240,6 +243,39 @@ const loadPlanCards = () => {
     })
 }
 
+// function to load add-on cards
+const loadAddOnCards = () => {
+    const addOnCardHolder = document.getElementById("addons-card-holder");
+
+    // get data on addOnCards
+    const addOnCardData = addOnsOptions.map((entry) => {
+        return(
+            `
+                <div class="add-on-card ${userData.addOns[entry.id] ? "selected-card": ""}" key=${entry.id}>
+                    <div class="add-on-card-main">
+                        <input id="add-on-card-selector-${entry.id}" type="checkbox" ${userData.addOns[entry.id] ? `checked="true"`: ""} onChange="addOnSelect(${entry.id})" />
+
+                        <div class="add-on-card-description">
+                            <h4 class="blueText">${entry.title}</h4>
+                            <p class="greyText">${entry.description}</p>
+                        </div>
+                    </div>
+
+                    <p class="blueText">$${userData.billingType == 0 ? entry.billMonthly: entry.billYearly}/${userData.billingType == 0 ? "mo" : "yr"}</p>
+                </div>
+            `
+        )
+    })
+
+    // clear addOnCardHolder
+    addOnCardHolder.innerHTML = "";
+
+    // set data in addons holder
+    addOnCardData.forEach((entry) => {
+        addOnCardHolder.innerHTML = addOnCardHolder.innerHTML + entry;
+    })
+}
+
 // function to transition to the next step
 const nextClick = (step) => {
     currentStep += step;
@@ -256,6 +292,11 @@ const nextClick = (step) => {
     // load pricing cards for step 2
     if(currentStep === 2){
         loadPlanCards();
+    }
+
+    // load addon cards for step 3
+    if(currentStep === 3){
+        loadAddOnCards();
     }
 }
 
@@ -297,4 +338,15 @@ const planSelected = (id) => {
 
     // reload the plan cards
     loadPlanCards();
+}
+
+// function to adjust addons
+const addOnSelect = (id) => {
+    const addOnCard = document.getElementById(`add-on-card-selector-${id}`);
+    
+    // update userData
+    userData.addOns[id] = addOnCard.checked;
+
+    // load cards again
+    loadAddOnCards();
 }
