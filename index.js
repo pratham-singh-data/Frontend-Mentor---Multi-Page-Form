@@ -6,9 +6,7 @@ const userData = {
     billingType: 0,
     billingPlan: 0,
     plan: 0,
-    addOns:{
-        1: true
-    }
+    addOns:{}
 };
 
 // navbar options
