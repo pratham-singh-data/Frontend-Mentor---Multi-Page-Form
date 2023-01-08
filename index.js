@@ -273,7 +273,7 @@ const loadAddOnCards = () => {
             `
                 <div class="add-on-card ${userData.addOns[entry.id] ? "selected-card": ""}" key=${entry.id}>
                     <div class="add-on-card-main">
-                        <input id="add-on-card-selector-${entry.id}" type="checkbox" ${userData.addOns[entry.id] ? `checked="true"`: ""} onChange="addOnSelect(${entry.id})" />
+                        <input class="add-on-checkbox" id="add-on-card-selector-${entry.id}" type="checkbox" ${userData.addOns[entry.id] ? `checked="true"`: ""} onChange="addOnSelect(${entry.id})" />
 
                         <div class="add-on-card-description">
                             <h4 class="blueText">${entry.title}</h4>
