@@ -177,15 +177,31 @@ const contentData = {
 
             <div id="summary-total"></div>
         <div>
+    </div>
 
     <button class="content-button-prev" onClick="nextClick(-1)">
         Go Back
     </button>
 
-    <button class="content-button submit-button">
+    <button class="content-button submit-button" onClick="submitClick()">
         Submit
     </button>
-`
+`,
+    5: `
+    <div class="page-main-content submit-page-content">
+        <div class="submit-page-centering">
+            <img id="thank-you-icon" src="assets/images/icon-thank-you.svg" alt="Thank You" />
+
+            <h2 class="content-head-text">
+                Thank you!
+            </h2>
+
+            <span class="greyText" id="thank-you-text">
+                Thanks for confirming your subscription! We hope you have fun using your platform. If you ever need support, please feel free to email us at support@loremgaming.com.
+            </span>
+        </div>
+    </div>
+    `
 }
 
 // function to load navbar with navOptions
@@ -456,4 +472,9 @@ const loadSummary = () => {
             $${userData.billingType ? `${total}/yr` : `${total}/mo`}
         </span>
     `
+}
+
+const submitClick = () => {
+    // load the content of page 5
+    document.getElementById("content").innerHTML = contentData[5];
 }

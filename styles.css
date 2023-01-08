@@ -320,6 +320,30 @@ html{
     color: #42414D;
 }
 
+#thank-you-icon{
+    margin-bottom: 20px;
+}
+
+.submit-page-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-page-centering{
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#thank-you-text{
+    text-align: center;
+}
+
 @media screen and (min-width: 700px){
     html{
         display: flex;
