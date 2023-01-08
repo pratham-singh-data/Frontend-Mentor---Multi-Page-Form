@@ -28,16 +28,16 @@ Users should be able to:
 
 ### Screenshot
 
-![Add-Ons-Page-Desktop](assets/screenshots/Add-Ons-Page-Desktop.png)
-![Add-Ons-Page-Mobile](assets/screenshots/Add-Ons-Page-Mobile.png)
-![Confirm-Page-Desktop](assets/screenshots/Confirm-Page-Desktop.png)
-![Confirm-Page-Mobile](assets/screenshots/Confirm-Page-Mobile.png)
-![Information-Desktop](assets/screenshots/Information-Desktop.png)
-![Information-Mobile](assets/screenshots/Information-Mobile.png)
-![Plan-Page-Desktop](assets/screenshots/Plan-Page-Desktop.png)
-![Plan-Page-Mobile](assets/screenshots/Plan-Page-Mobile.png)
-![Thank-You-Page-Desktop](assets/screenshots/Thank-You-Page-Desktop.png)
-![Thank-You-Page-Mobile](assets/screenshots/Thank-You-Page-Mobile.png)
+![Add-Ons-Page-Desktop](assets/screenshots/Add-Ons-Page-Desktop.png?raw=true)
+![Add-Ons-Page-Mobile](assets/screenshots/Add-Ons-Page-Mobile.png?raw=true)
+![Confirm-Page-Desktop](assets/screenshots/Confirm-Page-Desktop.png?raw=true)
+![Confirm-Page-Mobile](assets/screenshots/Confirm-Page-Mobile.png?raw=true)
+![Information-Desktop](assets/screenshots/Information-Desktop.png?raw=true)
+![Information-Mobile](assets/screenshots/Information-Mobile.png?raw=true)
+![Plan-Page-Desktop](assets/screenshots/Plan-Page-Desktop.png?raw=true)
+![Plan-Page-Mobile](assets/screenshots/Plan-Page-Mobile.png?raw=true)
+![Thank-You-Page-Desktop](assets/screenshots/Thank-You-Page-Desktop.png?raw=true)
+![Thank-You-Page-Mobile](assets/screenshots/Thank-You-Page-Mobile.png?raw=true)
 
 ### Links
 
