@@ -222,7 +222,7 @@ const loadPlanCards = () => {
     // get billing data
     const billingData = billingPlans.map((entry) => {
         return `
-            <div key=${entry.id} class="plan-card ${entry.id === userData.plan ? "selected-card" : ""}" onClick="planSelected(${entry.id})">
+            <div key=${entry.id} class="plan-card ${entry.id === userData.billingPlan ? "selected-card" : ""}" onClick="planSelected(${entry.id})">
                 <img class="plan-card-image" src=${entry.image} alt=${entry.title}/>
 
                 <div class="plan-card-details">
@@ -343,7 +343,7 @@ const billingTypeChange = () => {
 // function to set selected plan
 const planSelected = (id) => {
     // set new plan
-    userData.plan = id;
+    userData.billingPlan = id;
 
     // reload the plan cards
     loadPlanCards();
@@ -369,7 +369,7 @@ const loadSummary = () => {
         <div>
             <p class="blueText boldText">${[billingPlans[userData.billingPlan].title]} (${userData.billingType ? "Yesrly" : "Monthly"})</p>
 
-            <p class="greyText link">
+            <p class="greyText link" onClick="nextClick(-2)">
                 Change
             </p>
         </div>
