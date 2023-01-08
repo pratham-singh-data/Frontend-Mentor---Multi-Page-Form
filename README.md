@@ -28,7 +28,16 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](assets/screenshots/Add-Ons Page-Desktop.png)
+![](assets/screenshots/Add-Ons Page-Mobile.png)
+![](assets/screenshots/Confirm Page-Desktop.png)
+![](assets/screenshots/Confirm Page-Mobile.png)
+![](assets/screenshots/Information-Desktop.png)
+![](assets/screenshots/Information-Mobile.png)
+![](assets/screenshots/Plan Page-Desktop.png)
+![](assets/screenshots/Plan Page-Mobile.png)
+![](assets/screenshots/Thank You Page-Desktop.png)
+![](assets/screenshots/Thank You Page-Mobile.png)
 
 ### Links
 
