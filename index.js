@@ -169,10 +169,14 @@ const contentData = {
         <h2 class="content-head-text">Summary</h2>
         <p class="content-text">Double check everythong looks OK before confirming.</p>
 
-        <div id="card-holder"></div>
+        <div class="summary-parent">
+            <div class="summary-holder">
+                <div id="summary-plan-selection"></div>
+                <div id="add-ons-selection"></div>
+            </div>
 
-
-    <div>
+            <div id="summary-total"></div>
+        <div>
 
     <button class="content-button-prev" onClick="nextClick(-1)">
         Go Back
@@ -298,6 +302,11 @@ const nextClick = (step) => {
     if(currentStep === 3){
         loadAddOnCards();
     }
+
+    // load summary for step 4
+    if(currentStep === 4){
+        loadSummary();
+    }
 }
 
 
@@ -349,4 +358,102 @@ const addOnSelect = (id) => {
 
     // load cards again
     loadAddOnCards();
+}
+
+// function to load summary
+const loadSummary = () => {
+    // load plan data
+    const summaryPlanSelection = document.getElementById("summary-plan-selection");
+
+    summaryPlanSelection.innerHTML = `
+        <div>
+            <p class="blueText boldText">${[billingPlans[userData.billingPlan].title]} (${userData.billingType ? "Yesrly" : "Monthly"})</p>
+
+            <p class="greyText link">
+                Change
+            </p>
+        </div>
+
+        <span class="blueText boldText">
+            $${userData.billingType ? `${billingPlans[userData.billingPlan].billYearly}/yr` : `${billingPlans[userData.billingPlan].billMonthly}/mo`}
+        </span>
+    `
+
+    // load add-ons
+    const addOnsSelection = document.getElementById("add-ons-selection");
+
+    const addOnsCards = Object.keys(userData.addOns).map((entry) => {
+        // if value is false then return empty
+        if(!userData.addOns[entry]){
+            return "";
+        }
+
+        return `
+            <div class="summary-add-on-card">
+                <span class="greyText">
+                    ${addOnsOptions[entry].title}
+                </span>
+
+                <span class="blueText">
+                $${userData.billingType ? `${addOnsOptions[entry].billYearly}/yr` : `${addOnsOptions[entry].billMonthly}/mo` }
+                </span>
+            </div>
+        `
+    })
+
+    // cleat addons
+    addOnsSelection.innerHTML = "";
+
+    // load cards
+    addOnsCards.forEach((entry) => {
+        addOnsSelection.innerHTML = addOnsSelection.innerHTML + entry;
+    })
+
+    // display total
+    const summaryTotal = document.getElementById("summary-total");
+
+    // calculate total
+    let total;
+
+    if(userData.billingType){
+        // for yearly payment
+        // add plan value
+        total = parseInt(billingPlans[userData.billingPlan].billYearly);
+
+        // add addOns
+        Object.keys(userData.addOns).forEach((entry) => {
+            // userData.addOns for any entry is false return
+            if(! userData.addOns[entry]){
+                return;
+            }
+
+            total += parseInt(addOnsOptions[entry].billYearly);
+        }) 
+    }
+    else{
+        // for monthly billing
+        // add plan value
+        total = parseInt(billingPlans[userData.billingPlan].billMonthly);
+
+        // add addOns
+        Object.keys(userData.addOns).forEach((entry) => {
+            // userData.addOns for any entry is false return
+            if(! userData.addOns[entry]){
+                return;
+            }
+
+            total += parseInt(addOnsOptions[entry].billMonthly);
+        }) 
+    }
+
+    // display
+    summaryTotal.innerHTML = `
+        <span class="greyText">
+            Total (per ${userData.billingType ? "Year" : "Month"})
+        </span>
+
+        <span class="blueText boldText">
+            $${userData.billingType ? `${total}/yr` : `${total}/mo`}
+        </span>
+    `
 }

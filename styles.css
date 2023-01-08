@@ -216,6 +216,57 @@ html{
     width: 100%;
 }
 
+.summary-parent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.boldText {
+    font-weight: bold;
+}
+
+.summary-holder{
+    background-color: #F8F9FE;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#summary-plan-selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #42414D;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.link{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.summary-add-on-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#summary-total{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 .add-on-card{
     display: flex;
     flex-direction: row;
